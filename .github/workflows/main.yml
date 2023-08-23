@@ -1,10 +1,9 @@
 name: Main
 
 on:
+  workflow_dispatch:
   push:
     branches: [develop]
-
-  workflow-dispatch:
 
 concurrency:
   group: main-build
