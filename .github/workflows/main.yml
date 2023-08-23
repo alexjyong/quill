@@ -4,6 +4,8 @@ on:
   push:
     branches: [develop]
 
+  workflow-dispatch:
+
 concurrency:
   group: main-build
   cancel-in-progress: true
