@@ -74,16 +74,73 @@ class Toolbar extends Module<ToolbarProps> {
     this.addHandler('video', this.videoHandler);
   }
 
-  videoHandler(value: any) {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'video/*');
-    input.onchange = () => {
-      const range = this.quill.getSelection(true);// @ts-expect-error Fix me later
-      this.quill.uploader.upload(range, input.files);
-    };
-    input.click();
-  }
+  videoHandler() {
+    // Check if the dropdown already exists
+    let dropdown = document.getElementById('videoDropdown');
+    if (!dropdown) {
+        // Create the dropdown menu
+        dropdown = document.createElement('div');
+        dropdown.id = 'videoDropdown';
+        dropdown.style.position = 'absolute';
+        dropdown.style.zIndex = '1000';
+        dropdown.style.backgroundColor = '#fff';
+        dropdown.style.border = '1px solid #ccc';
+        dropdown.style.display = 'none'; // Initially hidden
+        document.body.appendChild(dropdown);
+
+        // Option to embed from URL
+        const embedOption = document.createElement('div');
+        embedOption.innerText = 'Embed from URL';
+        embedOption.onclick = () => {
+            const url = prompt('Enter video URL:');
+            if (url) {
+                const range = this.quill.getSelection(true);
+                this.quill.insertEmbed(range.index, 'video', url);
+            }// @ts-ignore
+            dropdown.style.display = 'none'; // Hide dropdown after selection
+        };
+        dropdown.appendChild(embedOption);
+
+        // Option to upload video
+        const uploadOption = document.createElement('div');
+        uploadOption.innerText = 'Upload Video';
+        uploadOption.onclick = () => {
+            const input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'video/*');
+            input.click();
+
+            input.onchange = () => {// @ts-ignore
+                const file = input.files[0];
+                if (file) {
+                    const range = this.quill.getSelection(true);
+                    this.quill.uploader.upload(range, [file]);
+                }
+            };
+            // @ts-ignore
+            dropdown.style.display = 'none'; // Hide dropdown after selection
+        };
+        dropdown.appendChild(uploadOption);
+    }
+
+    // Toggle the visibility of the dropdown menu
+    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+
+    // Position the dropdown below the video button
+    const videoButton = document.querySelector('.ql-video'); // Adjust the selector if needed
+    // @ts-ignore
+    const rect = videoButton.getBoundingClientRect(); // @ts-ignore
+    dropdown.style.left = `${rect.left}px`;
+    dropdown.style.top = `${rect.bottom}px`;
+
+    // Hide the dropdown menu if the user clicks outside
+    document.addEventListener('click', (e) => { // @ts-ignore
+        if (e.target !== dropdown && e.target !== videoButton && !dropdown.contains(e.target)) { // @ts-ignore
+            dropdown.style.display = 'none'; 
+        } 
+    });
+}
+
 
   addHandler(format: string, handler: Handler) {
     this.handlers[format] = handler;
