@@ -53,27 +53,33 @@ class Uploader extends Module<UploaderOptions> {
 }
 
 Uploader.DEFAULTS = {
-  mimetypes: ['image/png', 'image/jpeg'],
+  mimetypes: ['image/png', 'image/jpeg','video/mp4', 'video/webm'],
   handler(range: Range, files: File[]) {
     const promises = files.map((file) => {
       return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onload = (e) => {
           // @ts-expect-error Fix me later
-          resolve(e.target.result);
+          resolve({ data: e.target.result, type: file.type });
         };
         reader.readAsDataURL(file);
       });
     });
-    Promise.all(promises).then((images) => {
-      const update = images.reduce((delta: Delta, image) => {
-        return delta.insert({ image });
+    Promise.all(promises).then((results) => {
+      const update = results.reduce((delta: Delta, result) => {
+        // @ts-expect-error Fix me later
+        if (result.type.startsWith('image/')) {
+          // @ts-expect-error Fix me later
+          return delta.insert({ image: result.data });
+          // @ts-expect-error Fix me later
+        } else if (result.type.startsWith('video/')) {
+          // @ts-expect-error Fix me later
+          return delta.insert({ video: result.data });
+        }
+        return delta;
       }, new Delta().retain(range.index).delete(range.length)) as Delta;
       this.quill.updateContents(update, Emitter.sources.USER);
-      this.quill.setSelection(
-        range.index + images.length,
-        Emitter.sources.SILENT,
-      );
+      this.quill.setSelection(range.index + results.length, Emitter.sources.SILENT);
     });
   },
 };

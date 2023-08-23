@@ -9,11 +9,18 @@ class Video extends BlockEmbed {
   static tagName = 'IFRAME';
 
   static create(value: string) {
-    const node = super.create(value) as Element;
-    node.setAttribute('frameborder', '0');
-    node.setAttribute('allowfullscreen', 'true');
-    node.setAttribute('src', this.sanitize(value));
-    return node;
+    if (value.startsWith('data:video/')) {
+      const node = document.createElement('video');
+      node.setAttribute('controls', '');
+      node.setAttribute('src', value);
+      return node;
+    } else {
+      const node = super.create(value) as Element;
+      node.setAttribute('frameborder', '0');
+      node.setAttribute('allowfullscreen', 'true');
+      node.setAttribute('src', this.sanitize(value));
+      return node;
+    }
   }
 
   static formats(domNode: Element) {

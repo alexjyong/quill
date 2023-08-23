@@ -55,20 +55,34 @@ class Toolbar extends Module<ToolbarProps> {
       });
     }
     Array.from(this.container.querySelectorAll('button, select')).forEach(
-      (input) => {
-        // @ts-expect-error
+      (input) => { // @ts-expect-error Fix me later
         this.attach(input);
       },
     );
-    this.quill.on(Quill.events.EDITOR_CHANGE, (type, range) => {
+    // @ts-ignore
+    this.quill.on(Quill.events.EDITOR_CHANGE, (type, range) => { 
       if (type === Quill.events.SELECTION_CHANGE) {
         this.update(range as Range);
       }
     });
     this.quill.on(Quill.events.SCROLL_OPTIMIZE, () => {
-      const [range] = this.quill.selection.getRange(); // quill.getSelection triggers update
+      const [range] = this.quill.selection.getRange();
       this.update(range);
     });
+
+    // Add the video handler
+    this.addHandler('video', this.videoHandler);
+  }
+
+  videoHandler(value: any) {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'video/*');
+    input.onchange = () => {
+      const range = this.quill.getSelection(true);// @ts-expect-error Fix me later
+      this.quill.uploader.upload(range, input.files);
+    };
+    input.click();
   }
 
   addHandler(format: string, handler: Handler) {
@@ -308,6 +322,9 @@ Toolbar.DEFAULTS = {
       } else {
         this.quill.format('list', value, Quill.sources.USER);
       }
+    },
+    video(value: any) {
+      this.videoHandler(value);
     },
   },
 };
