@@ -83,8 +83,11 @@ class Toolbar extends Module<ToolbarProps> {
         dropdown.id = 'videoDropdown';
         dropdown.style.position = 'absolute';
         dropdown.style.zIndex = '1000';
-        dropdown.style.backgroundColor = '#fff';
-        dropdown.style.border = '1px solid #ccc';
+        dropdown.style.padding = '5px';
+        dropdown.style.borderRadius = '3px';
+        dropdown.style.boxShadow = '0px 2px 10px rgba(0, 0, 0, 0.1)';
+        dropdown.style.backgroundColor = '#f9f9f9';
+        dropdown.style.width = '150px'; // Reduced width
         dropdown.style.display = 'none'; // Initially hidden
         document.body.appendChild(dropdown);
 
@@ -116,11 +119,36 @@ class Toolbar extends Module<ToolbarProps> {
                     const range = this.quill.getSelection(true);
                     this.quill.uploader.upload(range, [file]);
                 }
-            };
-            // @ts-ignore
+            };// @ts-ignore
             dropdown.style.display = 'none'; // Hide dropdown after selection
         };
         dropdown.appendChild(uploadOption);
+
+        // Style the options
+        // @ts-ignore
+        // Style the options
+        const styleOption = (option) => {
+          option.style.padding = '5px 10px'; // Reduced padding
+          option.style.cursor = 'pointer';
+          option.style.fontSize = '14px'; // Smaller font size
+          option.style.transition = 'background-color 0.2s';
+
+          // Hover effect
+          option.addEventListener('mouseover', () => {
+              option.style.backgroundColor = '#e6e6e6';
+          });
+          option.addEventListener('mouseout', () => {
+              option.style.backgroundColor = 'transparent';
+          });
+        };
+
+        styleOption(embedOption);
+        styleOption(uploadOption);
+
+        // Insert an <hr> to divide the options
+        const divider = document.createElement('hr');
+        divider.style.margin = '10px 0';
+        dropdown.insertBefore(divider, uploadOption);
     }
 
     // Toggle the visibility of the dropdown menu
@@ -129,17 +157,37 @@ class Toolbar extends Module<ToolbarProps> {
     // Position the dropdown below the video button
     const videoButton = document.querySelector('.ql-video'); // Adjust the selector if needed
     // @ts-ignore
-    const rect = videoButton.getBoundingClientRect(); // @ts-ignore
+    const rect = videoButton.getBoundingClientRect();
     dropdown.style.left = `${rect.left}px`;
     dropdown.style.top = `${rect.bottom}px`;
 
-    // Hide the dropdown menu if the user clicks outside
-    document.addEventListener('click', (e) => { // @ts-ignore
-        if (e.target !== dropdown && e.target !== videoButton && !dropdown.contains(e.target)) { // @ts-ignore
-            dropdown.style.display = 'none'; 
-        } 
+    let videoButtonClicked = false; // Flag to track if the video button was clicked
+    let showDropdown = false; // Flag to track the desired visibility state of the dropdown
+
+    // @ts-ignore
+    videoButton.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        videoButtonClicked = true; // Set the flag to true when the video button is clicked
+        // @ts-ignore
+        showDropdown = dropdown.style.display === 'none'; // Set the desired visibility state
     });
+
+    document.addEventListener('mousedown', (e) => {
+        // @ts-ignore
+        if (e.target !== dropdown && !dropdown.contains(e.target) && e.target !== videoButton) {
+            if (videoButtonClicked) {
+                // @ts-ignore
+                dropdown.style.display = showDropdown ? 'block' : 'none'; // Update dropdown visibility based on the flag
+                videoButtonClicked = false; // Reset the flag
+                return; // If the video button was clicked, do not hide the dropdown
+            }
+            // @ts-ignore
+            dropdown.style.display = 'none';
+        }
+    });
+
 }
+
 
 
   addHandler(format: string, handler: Handler) {
