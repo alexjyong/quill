@@ -176,9 +176,8 @@ class Toolbar extends Module<ToolbarProps> {
     });
 
     document.addEventListener('mousedown', (e) => {
-      // @ts-ignore
       if (
-        e.target !== dropdown &&
+        e.target !== dropdown &&// @ts-ignore
         !dropdown.contains(e.target) &&
         e.target !== videoButton
       ) {
