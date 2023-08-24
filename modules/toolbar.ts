@@ -111,7 +111,17 @@ class Toolbar extends Module<ToolbarProps> {
       uploadOption.onclick = () => {
         const input = document.createElement('input');
         input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'video/*');
+        // Extract video mime types from this.quill.uploader.options.mimetypes
+        // @ts-ignore
+        const videoMimeTypes = this.quill.uploader.options.mimetypes.filter(
+          (mimetype) => mimetype.startsWith('video/'),
+        );
+
+        // Convert the mime types into a string format for the accept attribute
+        const acceptValue = videoMimeTypes.join(',');
+
+        // Set the accept attribute of the input element
+        input.setAttribute('accept', acceptValue);
         input.click();
 
         input.onchange = () => {

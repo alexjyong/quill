@@ -53,7 +53,23 @@ class Uploader extends Module<UploaderOptions> {
 }
 
 Uploader.DEFAULTS = {
-  mimetypes: ['image/png', 'image/jpeg', 'video/mp4', 'video/webm'],
+  mimetypes: [
+    'image/png',
+    'image/jpeg',
+    'image/gif',
+    'video/mp4',
+    'video/webm',
+    'video/quicktime', // MOV
+    'video/x-msvideo', // AVI
+    'video/mpeg', // MPEG
+    'video/x-matroska', // MKV
+    'video/ogg', // OGV
+    'video/x-flv', // FLV
+    'video/x-ms-wmv', // WMV
+    'video/3gpp', // 3GP
+    'video/3gpp2', // 3G2
+    'video/x-ms-asf', // ASF
+  ],
   handler(range: Range, files: File[]) {
     const promises = files.map((file) => {
       return new Promise((resolve) => {
