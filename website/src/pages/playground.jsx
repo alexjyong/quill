@@ -13,7 +13,7 @@ const pens = [
   { title: 'Autogrow Height', hash: 'dOqrVm' },
   { title: 'Custom Fonts', hash: 'gLBYam' },
   { title: 'Quill Playground', hash: 'KzZqZx' },
-].map(pen => ({ ...pen, slug: slug(pen.title) }));
+].map((pen) => ({ ...pen, slug: slug(pen.title) }));
 
 const isBrowser = typeof window !== 'undefined';
 
@@ -21,7 +21,9 @@ const Playground = () => {
   const [selectedPen, setSelectedPen] = useState(() => {
     if (!isBrowser) return pens.length - 1;
     const { hash } = window.location;
-    const index = hash ? pens.findIndex(pen => pen.slug === hash.slice(1)) : -1;
+    const index = hash
+      ? pens.findIndex((pen) => pen.slug === hash.slice(1))
+      : -1;
     return index === -1 ? pens.length - 1 : index;
   });
   return (
@@ -47,7 +49,7 @@ const Playground = () => {
                 href={`/playground/#${slug(pen.title)}`}
                 title={pen.title}
                 data-id={pen.hash}
-                onClick={e => {
+                onClick={(e) => {
                   setSelectedPen(index);
                 }}
               >

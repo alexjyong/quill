@@ -8,7 +8,7 @@ const LOAD_STATE = {
   loaded: '__loaded__',
 };
 
-const CodePen = props => {
+const CodePen = (props) => {
   const [loadState, setLoadState] = useState(LOAD_STATE.booting);
   const _isMounted = useRef(false);
 

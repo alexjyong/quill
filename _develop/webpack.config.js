@@ -26,7 +26,7 @@ const source = [
   'test',
   'themes',
   'ui',
-].map(file => {
+].map((file) => {
   return path.resolve(__dirname, '..', file);
 });
 
@@ -104,7 +104,7 @@ const baseConfig = {
   },
 };
 
-module.exports = env => {
+module.exports = (env) => {
   if (env?.minimize) {
     const { devServer, ...prodConfig } = baseConfig;
     return {

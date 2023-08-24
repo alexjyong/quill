@@ -2,7 +2,7 @@
 title: Basic Example
 ---
 
-import * as styles from './basic.module.scss'
+import * as styles from './basic.module.scss';
 
 <div className={styles.container}>
   <div
@@ -35,7 +35,11 @@ import * as styles from './basic.module.scss'
       <option value="blue">Blue</option>
       <option value="purple">Purple</option>
     </select>
-    <select className="ql-background" title="Background Color" defaultValue="white">
+    <select
+      className="ql-background"
+      title="Background Color"
+      defaultValue="white"
+    >
       <option value="white">White</option>
       <option value="black">Black</option>
       <option value="red">Red</option>
@@ -51,14 +55,30 @@ import * as styles from './basic.module.scss'
       <option value="right">Right</option>
       <option value="justify">Justify</option>
     </select>
-    <button className="ql-bold" title="Bold">Bold</button>
-    <button className="ql-italic" title="Italic">Italic</button>
-    <button className="ql-underline" title="Underline">Under</button>
-    <button className="ql-strike" title="Strikethrough">Strike</button>
-    <button className="ql-link" title="Link">Link</button>
-    <button className="ql-image" title="Image">Image</button>
-    <button className="ql-list" title="Bullet" value="bullet">Bullet</button>
-    <button className="ql-list" title="List" value="ordered">List</button>
+    <button className="ql-bold" title="Bold">
+      Bold
+    </button>
+    <button className="ql-italic" title="Italic">
+      Italic
+    </button>
+    <button className="ql-underline" title="Underline">
+      Under
+    </button>
+    <button className="ql-strike" title="Strikethrough">
+      Strike
+    </button>
+    <button className="ql-link" title="Link">
+      Link
+    </button>
+    <button className="ql-image" title="Image">
+      Image
+    </button>
+    <button className="ql-list" title="Bullet" value="bullet">
+      Bullet
+    </button>
+    <button className="ql-list" title="List" value="ordered">
+      List
+    </button>
   </div>
   <Editor
     style={{

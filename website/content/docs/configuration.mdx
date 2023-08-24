@@ -4,13 +4,12 @@ title: Configuration
 
 Quill allows several ways to customize it to suit your needs. This section is dedicated to tweaking existing functionality. See the [Modules](/docs/modules/) section for adding new functionality and the [Themes](/docs/themes/) section for styling.
 
-
 ### Container
 
 Quill requires a container where the editor will be appended. You can pass in either a CSS selector or a DOM object.
 
 ```javascript
-var editor = new Quill('.editor');  // First matching element will be used
+var editor = new Quill('.editor'); // First matching element will be used
 ```
 
 ```javascript
@@ -31,11 +30,11 @@ To configure Quill, pass in an options object:
 var options = {
   debug: 'info',
   modules: {
-    toolbar: '#toolbar'
+    toolbar: '#toolbar',
   },
   placeholder: 'Compose an epic...',
   readOnly: true,
-  theme: 'snow'
+  theme: 'snow',
 };
 var editor = new Quill('#editor', options);
 ```

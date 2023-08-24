@@ -7,7 +7,7 @@ const Blog = ({ data }) => (
   <Default>
     <div id="blog-container" className="container">
       <div className="post-list">
-        {data.allMdx.nodes.map(node => (
+        {data.allMdx.nodes.map((node) => (
           <div className="post-item">
             <h1>
               <a href={node.fields.permalink} title={node.frontmatter.title}>

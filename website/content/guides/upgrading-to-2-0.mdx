@@ -6,9 +6,9 @@ In progress
 
 ## Quill
 
-- `strict` *removed* - Previously some changes that were small in practice (renames) but would warrant a semver major bump would be hidden under this configuration. This ended up being more confusing than helpful as we will no longer make use of this.
+- `strict` _removed_ - Previously some changes that were small in practice (renames) but would warrant a semver major bump would be hidden under this configuration. This ended up being more confusing than helpful as we will no longer make use of this.
 - `registry` - added to allow multiple editors with different formats to coexist on the same page.
-- `formats` *removed* - `registry` is now strictly more powerful and safer.
+- `formats` _removed_ - `registry` is now strictly more powerful and safer.
 
 ## Clipboard
 
@@ -17,8 +17,8 @@ In progress
 
 ### Configuration
 
-- `matchVisual` *removed* - Previously there was a choice between using visual or semantic interpretation of pasted whitespace; now just the semantic interpretation is used. Visual matching was expensive, requiring the DOM renderer which is no longer available in the new clipboard rewrite.
-- `pasteHTML` *removed* - Deprecated alias to `dangerouslyPasteHTML`.
+- `matchVisual` _removed_ - Previously there was a choice between using visual or semantic interpretation of pasted whitespace; now just the semantic interpretation is used. Visual matching was expensive, requiring the DOM renderer which is no longer available in the new clipboard rewrite.
+- `pasteHTML` _removed_ - Deprecated alias to `dangerouslyPasteHTML`.
 
 ## Keyboard
 

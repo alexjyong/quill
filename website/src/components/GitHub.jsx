@@ -12,8 +12,8 @@ const GitHub = ({ dark = false }) => {
     fetch(
       'https://api.github.com/search/repositories?q=quill+user:quilljs+repo:quill&sort=stars&order=desc',
     )
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.items && data.items[0].full_name === 'quilljs/quill') {
           setCount(data.items[0].stargazers_count.toLocaleString());
         }

@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'Sofia Pro';
   src: url('//cdn.quilljs.com/fonts/sofia-pro.eot');
-  src: url('//cdn.quilljs.com/fonts/sofia-pro.eot?#iefix')
+  src:
+    url('//cdn.quilljs.com/fonts/sofia-pro.eot?#iefix')
       format('embedded-opentype'),
     url('//cdn.quilljs.com/fonts/sofia-pro.woff2') format('woff2'),
     url('//cdn.quilljs.com/fonts/sofia-pro.woff') format('woff'),
@@ -11,7 +12,8 @@
   font-family: 'Sofia Pro';
   font-weight: bold;
   src: url('//cdn.quilljs.com/fonts/sofia-pro-bold.eot');
-  src: url('//cdn.quilljs.com/fonts/sofia-pro-bold.eot?#iefix')
+  src:
+    url('//cdn.quilljs.com/fonts/sofia-pro-bold.eot?#iefix')
       format('embedded-opentype'),
     url('//cdn.quilljs.com/fonts/sofia-pro-bold.woff2') format('woff2'),
     url('//cdn.quilljs.com/fonts/sofia-pro-bold.woff') format('woff'),
@@ -20,7 +22,8 @@
 @font-face {
   font-family: 'Sailec Light';
   src: url('//cdn.quilljs.com/fonts/sailec-light.eot');
-  src: url('//cdn.quilljs.com/fonts/sailec-light.eot?#iefix')
+  src:
+    url('//cdn.quilljs.com/fonts/sailec-light.eot?#iefix')
       format('embedded-opentype'),
     url('//cdn.quilljs.com/fonts/sailec-light.woff2') format('woff2'),
     url('//cdn.quilljs.com/fonts/sailec-light.woff') format('woff'),
@@ -30,7 +33,8 @@
   font-family: 'Sailec Light';
   font-weight: bold;
   src: url('//cdn.quilljs.com/fonts/sailec-bold.eot');
-  src: url('//cdn.quilljs.com/fonts/sailec-bold.eot?#iefix')
+  src:
+    url('//cdn.quilljs.com/fonts/sailec-bold.eot?#iefix')
       format('embedded-opentype'),
     url('//cdn.quilljs.com/fonts/sailec-bold.woff2') format('woff2'),
     url('//cdn.quilljs.com/fonts/sailec-bold.woff') format('woff'),
@@ -173,7 +177,10 @@ svg .feat-3 {
   font-weight: bold;
   letter-spacing: 0.15rem;
   text-transform: uppercase;
-  transition: background-color 100ms, border-color 100ms, color 100ms;
+  transition:
+    background-color 100ms,
+    border-color 100ms,
+    color 100ms;
 }
 
 .logo {
@@ -1536,7 +1543,8 @@ body:not(.home) .navbar-link:before {
     position: absolute;
     right: 0;
     text-align: center;
-    transition: max-height 800ms ease-in-out 0s,
+    transition:
+      max-height 800ms ease-in-out 0s,
       background-color 500ms linear 0s;
   }
   #sidebar-container.active {

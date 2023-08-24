@@ -13,8 +13,8 @@ import React, { useEffect } from 'react';
 const getPagination = (permalink, items) => {
   const flattenedItems = [];
 
-  const flatItems = i => {
-    i.forEach(child => {
+  const flatItems = (i) => {
+    i.forEach((child) => {
       if (child.url.includes('#')) return;
       flattenedItems.push(child);
       if (child.children) {
@@ -25,7 +25,7 @@ const getPagination = (permalink, items) => {
 
   flatItems(items);
 
-  const index = flattenedItems.findIndex(item => item.url === permalink);
+  const index = flattenedItems.findIndex((item) => item.url === permalink);
   if (index === -1) return { prev: null, next: null };
 
   let prev = null;
@@ -45,7 +45,7 @@ const SidebarItem = ({ item }) => {
       <a href={item.url}>{item.title}</a>
       {item.children && (
         <ul>
-          {item.children.map(child => (
+          {item.children.map((child) => (
             <SidebarItem key={child.url} item={child} />
           ))}
         </ul>
@@ -81,7 +81,7 @@ const Doc = ({ data, location, children }) => {
               <li className="search-item">
                 <input type="text" />
               </li>
-              {items.map(item => (
+              {items.map((item) => (
                 <SidebarItem key={item.url} item={item} />
               ))}
             </ul>

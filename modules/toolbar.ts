@@ -55,12 +55,13 @@ class Toolbar extends Module<ToolbarProps> {
       });
     }
     Array.from(this.container.querySelectorAll('button, select')).forEach(
-      (input) => { // @ts-expect-error Fix me later
+      (input) => {
+        // @ts-expect-error Fix me later
         this.attach(input);
       },
     );
     // @ts-ignore
-    this.quill.on(Quill.events.EDITOR_CHANGE, (type, range) => { 
+    this.quill.on(Quill.events.EDITOR_CHANGE, (type, range) => {
       if (type === Quill.events.SELECTION_CHANGE) {
         this.update(range as Range);
       }
@@ -78,81 +79,83 @@ class Toolbar extends Module<ToolbarProps> {
     // Check if the dropdown already exists
     let dropdown = document.getElementById('videoDropdown');
     if (!dropdown) {
-        // Create the dropdown menu
-        dropdown = document.createElement('div');
-        dropdown.id = 'videoDropdown';
-        dropdown.style.position = 'absolute';
-        dropdown.style.zIndex = '1000';
-        dropdown.style.padding = '5px';
-        dropdown.style.borderRadius = '3px';
-        dropdown.style.boxShadow = '0px 2px 10px rgba(0, 0, 0, 0.1)';
-        dropdown.style.backgroundColor = '#f9f9f9';
-        dropdown.style.width = '150px'; // Reduced width
-        dropdown.style.display = 'none'; // Initially hidden
-        document.body.appendChild(dropdown);
+      // Create the dropdown menu
+      dropdown = document.createElement('div');
+      dropdown.id = 'videoDropdown';
+      dropdown.style.position = 'absolute';
+      dropdown.style.zIndex = '1000';
+      dropdown.style.padding = '5px';
+      dropdown.style.borderRadius = '3px';
+      dropdown.style.boxShadow = '0px 2px 10px rgba(0, 0, 0, 0.1)';
+      dropdown.style.backgroundColor = '#f9f9f9';
+      dropdown.style.width = '150px'; // Reduced width
+      dropdown.style.display = 'none'; // Initially hidden
+      document.body.appendChild(dropdown);
 
-        // Option to embed from URL
-        const embedOption = document.createElement('div');
-        embedOption.innerText = 'Embed from URL';
-        embedOption.onclick = () => {
-            const url = prompt('Enter video URL:');
-            if (url) {
-                const range = this.quill.getSelection(true);
-                this.quill.insertEmbed(range.index, 'video', url);
-            }// @ts-ignore
-            dropdown.style.display = 'none'; // Hide dropdown after selection
-        };
-        dropdown.appendChild(embedOption);
+      // Option to embed from URL
+      const embedOption = document.createElement('div');
+      embedOption.innerText = 'Embed from URL';
+      embedOption.onclick = () => {
+        const url = prompt('Enter video URL:');
+        if (url) {
+          const range = this.quill.getSelection(true);
+          this.quill.insertEmbed(range.index, 'video', url);
+        } // @ts-ignore
+        dropdown.style.display = 'none'; // Hide dropdown after selection
+      };
+      dropdown.appendChild(embedOption);
 
-        // Option to upload video
-        const uploadOption = document.createElement('div');
-        uploadOption.innerText = 'Upload Video';
-        uploadOption.onclick = () => {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'video/*');
-            input.click();
+      // Option to upload video
+      const uploadOption = document.createElement('div');
+      uploadOption.innerText = 'Upload Video';
+      uploadOption.onclick = () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'video/*');
+        input.click();
 
-            input.onchange = () => {// @ts-ignore
-                const file = input.files[0];
-                if (file) {
-                    const range = this.quill.getSelection(true);
-                    this.quill.uploader.upload(range, [file]);
-                }
-            };// @ts-ignore
-            dropdown.style.display = 'none'; // Hide dropdown after selection
-        };
-        dropdown.appendChild(uploadOption);
+        input.onchange = () => {
+          // @ts-ignore
+          const file = input.files[0];
+          if (file) {
+            const range = this.quill.getSelection(true);
+            this.quill.uploader.upload(range, [file]);
+          }
+        }; // @ts-ignore
+        dropdown.style.display = 'none'; // Hide dropdown after selection
+      };
+      dropdown.appendChild(uploadOption);
 
-        // Style the options
-        // @ts-ignore
-        // Style the options
-        const styleOption = (option) => {
-          option.style.padding = '5px 10px'; // Reduced padding
-          option.style.cursor = 'pointer';
-          option.style.fontSize = '14px'; // Smaller font size
-          option.style.transition = 'background-color 0.2s';
+      // Style the options
+      // @ts-ignore
+      // Style the options
+      const styleOption = (option) => {
+        option.style.padding = '5px 10px'; // Reduced padding
+        option.style.cursor = 'pointer';
+        option.style.fontSize = '14px'; // Smaller font size
+        option.style.transition = 'background-color 0.2s';
 
-          // Hover effect
-          option.addEventListener('mouseover', () => {
-              option.style.backgroundColor = '#e6e6e6';
-          });
-          option.addEventListener('mouseout', () => {
-              option.style.backgroundColor = 'transparent';
-          });
-        };
+        // Hover effect
+        option.addEventListener('mouseover', () => {
+          option.style.backgroundColor = '#e6e6e6';
+        });
+        option.addEventListener('mouseout', () => {
+          option.style.backgroundColor = 'transparent';
+        });
+      };
 
-        styleOption(embedOption);
-        styleOption(uploadOption);
+      styleOption(embedOption);
+      styleOption(uploadOption);
 
-        // Insert an <hr> to divide the options
-        const divider = document.createElement('hr');
-        divider.style.margin = '10px 0';
-        dropdown.insertBefore(divider, uploadOption);
+      // Insert an <hr> to divide the options
+      const divider = document.createElement('hr');
+      divider.style.margin = '10px 0';
+      dropdown.insertBefore(divider, uploadOption);
     }
 
     // Toggle the visibility of the dropdown menu
-    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    dropdown.style.display =
+      dropdown.style.display === 'none' ? 'block' : 'none';
 
     // Position the dropdown below the video button
     const videoButton = document.querySelector('.ql-video'); // Adjust the selector if needed
@@ -166,29 +169,30 @@ class Toolbar extends Module<ToolbarProps> {
 
     // @ts-ignore
     videoButton.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
-        videoButtonClicked = true; // Set the flag to true when the video button is clicked
-        // @ts-ignore
-        showDropdown = dropdown.style.display === 'none'; // Set the desired visibility state
+      e.stopPropagation();
+      videoButtonClicked = true; // Set the flag to true when the video button is clicked
+      // @ts-ignore
+      showDropdown = dropdown.style.display === 'none'; // Set the desired visibility state
     });
 
     document.addEventListener('mousedown', (e) => {
-        // @ts-ignore
-        if (e.target !== dropdown && !dropdown.contains(e.target) && e.target !== videoButton) {
-            if (videoButtonClicked) {
-                // @ts-ignore
-                dropdown.style.display = showDropdown ? 'block' : 'none'; // Update dropdown visibility based on the flag
-                videoButtonClicked = false; // Reset the flag
-                return; // If the video button was clicked, do not hide the dropdown
-            }
-            // @ts-ignore
-            dropdown.style.display = 'none';
+      // @ts-ignore
+      if (
+        e.target !== dropdown &&
+        !dropdown.contains(e.target) &&
+        e.target !== videoButton
+      ) {
+        if (videoButtonClicked) {
+          // @ts-ignore
+          dropdown.style.display = showDropdown ? 'block' : 'none'; // Update dropdown visibility based on the flag
+          videoButtonClicked = false; // Reset the flag
+          return; // If the video button was clicked, do not hide the dropdown
         }
+        // @ts-ignore
+        dropdown.style.display = 'none';
+      }
     });
-
-}
-
-
+  }
 
   addHandler(format: string, handler: Handler) {
     this.handlers[format] = handler;

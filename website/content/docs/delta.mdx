@@ -19,8 +19,8 @@ The Delta format is almost entirely self-explanatory&mdash;the example below des
   ops: [
     { insert: 'Gandalf', attributes: { bold: true } },
     { insert: ' the ' },
-    { insert: 'Grey', attributes: { color: '#cccccc' } }
-  ]
+    { insert: 'Grey', attributes: { color: '#cccccc' } },
+  ];
 }
 ```
 
@@ -34,15 +34,17 @@ For non-text content such as images or formulas, the insert key can be an object
 
 ```javascript
 {
-  ops: [{
-    // An image link
-    insert: {
-      image: 'https://quilljs.com/assets/images/icon.png'
+  ops: [
+    {
+      // An image link
+      insert: {
+        image: 'https://quilljs.com/assets/images/icon.png',
+      },
+      attributes: {
+        link: 'https://quilljs.com',
+      },
     },
-    attributes: {
-      link: 'https://quilljs.com'
-    }
-  }]
+  ];
 }
 ```
 
@@ -55,8 +57,8 @@ Attributes associated with a newline character describes formatting for that lin
   ops: [
     { insert: 'The Two Towers' },
     { insert: '\n', attributes: { header: 1 } },
-    { insert: 'Aragorn sped on up the hill.\n' }
-  ]
+    { insert: 'Aragorn sped on up the hill.\n' },
+  ];
 }
 ```
 
@@ -75,8 +77,8 @@ The `delete` operation instructs exactly what it implies: delete the next number
 ```javascript
 {
   ops: [
-    { delete: 10 } // Delete the next 10 characters
-  ]
+    { delete: 10 }, // Delete the next 10 characters
+  ];
 }
 ```
 
@@ -109,8 +111,8 @@ Starting with the above "Gandalf the Grey" example:
     { insert: 'White', attributes: { color: '#fff' } },
 
     // Delete "Grey"
-    { delete: 4 }
-  ]
+    { delete: 4 },
+  ];
 }
 ```
 

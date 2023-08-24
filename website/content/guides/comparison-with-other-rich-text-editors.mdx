@@ -18,7 +18,6 @@ Although there are differences between them, CKEditor and TinyMCE are compared t
 
 - You need to set or edit the underlying HTML directly with arbitrary HTML. Quill does not support arbitrary modifications to its contents with `innerHTML` as it leads to surprising and buggy behavior. Instead, it provides a consistent [API](/docs/api/) for modification and the ability to define new formats and content through [Parchment](https://github.com/quilljs/parchment/).
 
-
 ## Draft
 
 Draft is often compared with Quill, but Draft, by its own description, is a "Rich Text Editor Framework for React." It provides the building blocks to create an editor, but is not one ready to use by itself. It is still worthwhile to compare Quill's internals with Draft however:
@@ -28,7 +27,10 @@ Draft is often compared with Quill, but Draft, by its own description, is a "Ric
 - Draft organizes nodes into two levels: block and inline. Parchment also has a block and inline layer, but inline nodes can be nested, allowing semantic output such as `<strong><em>Stronger</em></strong>` whereas the equivalent in Draft must use just one inline format node and utilizes inline styles:
 
   ```html
-  <span data-offset-key="1oo4h-0-0" style="font-weight: bold; font-style: italic;">
+  <span
+    data-offset-key="1oo4h-0-0"
+    style="font-weight: bold; font-style: italic;"
+  >
     <span data-text="true">Stronger</span>
   </span>
   ```
@@ -39,10 +41,9 @@ Draft is often compared with Quill, but Draft, by its own description, is a "Ric
 
 The main difference is still that Quill is a ready to use rich text editor, with user interactions considered and interfaces thought out and implemented. Draft provides the building blocks but you will have to implement all the pieces above the data layer yourself.
 
-
 ## ProseMirror
 
-ProseMirror is relatively new but has already captured significant attention, being built by the same author of  CodeMirror. That being said a robust comparison of the product and implementation is premature since ProseMirror is still in the development stages, as noted in their README:
+ProseMirror is relatively new but has already captured significant attention, being built by the same author of CodeMirror. That being said a robust comparison of the product and implementation is premature since ProseMirror is still in the development stages, as noted in their README:
 
 > NOTE: This project is in BETA stage. It isn't thoroughly tested, and the API might still change across 0.x releases. You are welcome to use it, but don't expect it to be very stable yet.
 
@@ -55,7 +56,6 @@ Instead we will compare the ideas and goals:
 - Quill's architecture is more modular, allowing for easier customization of internals. Core modules that handle basic functionality like copy/paste and undo/redo can be swapped out in Quill.
 
 - ProseMirror favors broad exposure of API methods, configurations and variables. Quill treats developers as users and designs an organized API surface, judicious in what to expose, sometimes hiding confusing methods or creating new ones that unify several internal operations.
-
 
 ## Trix
 

@@ -26,7 +26,7 @@ server.on('upgrade', (req, socket, head) => {
   proxy.ws(req, socket, head);
 });
 
-proxy.on('error', e => {
+proxy.on('error', (e) => {
   console.error(e);
 });
 

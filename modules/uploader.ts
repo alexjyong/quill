@@ -53,7 +53,7 @@ class Uploader extends Module<UploaderOptions> {
 }
 
 Uploader.DEFAULTS = {
-  mimetypes: ['image/png', 'image/jpeg','video/mp4', 'video/webm'],
+  mimetypes: ['image/png', 'image/jpeg', 'video/mp4', 'video/webm'],
   handler(range: Range, files: File[]) {
     const promises = files.map((file) => {
       return new Promise((resolve) => {
@@ -79,7 +79,10 @@ Uploader.DEFAULTS = {
         return delta;
       }, new Delta().retain(range.index).delete(range.length)) as Delta;
       this.quill.updateContents(update, Emitter.sources.USER);
-      this.quill.setSelection(range.index + results.length, Emitter.sources.SILENT);
+      this.quill.setSelection(
+        range.index + results.length,
+        Emitter.sources.SILENT,
+      );
     });
   },
 };

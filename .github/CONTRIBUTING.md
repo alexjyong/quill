@@ -15,11 +15,9 @@ After becoming familiar with Quill and the codebase, likely through using Quill 
 - Publishing guides, tutorials, and examples
 - Supporting Quill in other ecosystems (Angular, React, etc)
 
-
 ## Questions
 
 If you have a question, it is best to ask on StackOverflow and tag with [quill](http://stackoverflow.com/questions/tagged/quill). This tag is monitored by Quill maintainers and community members.
-
 
 ## Bug Reports
 
@@ -35,7 +33,6 @@ New bug reports must include:
 
 Lacking reports it may be autoclosed with a link to these instructions.
 
-
 ## Feature Requests
 
 Search through [Github Issues](https://github.com/quilljs/quill/labels/feature) to see if someone has already suggested the feature. If so, please provide support with a [reaction](https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments) and add your own use case.
@@ -50,7 +47,6 @@ To open a new feature request, please include:
 Features are prioritized based on real world users and use cases, not theoretically useful additions for other unknown users. Lacking feature requests may be autoclosed with a link to this section.
 
 The more complete and compelling the request, the more likely it will ultimately be implemented. Garnering community support will help as well!
-
 
 ## Pull Requests
 
